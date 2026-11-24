@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PATÝ ÝZÝ – Hayvan Haklarýný Koruma ve Toplumsal Farkýndalýk Platformu</title>
+  <meta name="description" content="9. Sýnýf TÜBÝTAK Bilimsel Araþtýrma Projesi: Hayvan Haklarýný Koruma, 5199 Sayýlý Kanun, Etkileþimli Test ve Farkýndalýk Platformu." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            forest: {
+              900: '#1B4332',
+              800: '#2D6A4F',
+              700: '#40916C',
+              100: '#D8F3DC',
+              50: '#F0FDF4',
+            },
+            cream: '#FAF8F5',
+            navy: '#0F172A',
+            accent: '#F97316',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      background-color: #FAF8F5;
+      color: #0F172A;
+    }
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.35s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card-hover {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(27, 67, 50, 0.08), 0 8px 10px -6px rgba(27, 67, 50, 0.04);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-forest-800 selection:text-white">
+
+  <!-- ÜST NAVÝGASYON -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- Logo -->
+        <button onclick="switchPage('home')" class="flex items-center gap-3 text-left group">
+          <div class="w-11 h-11 rounded-2xl bg-forest-900 text-white flex items-center justify-center shadow-md group-hover:bg-accent transition-colors">
+            <i data-lucide="paw-print" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="font-display font-extrabold text-xl tracking-tight text-forest-900 block leading-none">PATÝ ÝZÝ</span>
+            <span class="text-[11px] font-medium text-slate-500 tracking-wide">Onlarýn Sesi Ol, Haklarýný Koru!</span>
+          </div>
+        </button>
+
+        <!-- Masaüstü Menü -->
+        <nav class="hidden xl:flex items-center gap-1" id="desktop-nav">
+          <button onclick="switchPage('home')" data-nav="home" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold bg-forest-900 text-white">Ana Sayfa</button>
+          <button onclick="switchPage('rights')" data-nav="rights" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-forest-50 hover:text-forest-900">Bilgi Merkezi</button>
+          <button onclick="switchPage('law')" data-nav="law" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-forest-50 hover:text-forest-900">Hukuk & Mevzuat</button>
+          <button onclick="switchPage('report')" data-nav="report" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-forest-50 hover:text-forest-900">Ýhlal Rehberi</button>
+          <button onclick="switchPage('volunteer')" data-nav="volunteer" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-forest-50 hover:text-forest-900">Gönüllülük</button>
+          <button onclick="switchPage('quiz')" data-nav="quiz" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-forest-50 hover:text-forest-900">Bilgi Testi</button>
+          <button onclick="switchPage('survey')" data-nav="survey" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-forest-50 hover:text-forest-900">Anket</button>
+          <button onclick="switchPage('tubitak')" data-nav="tubitak" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-forest-50 hover:text-forest-900">TÜBÝTAK Projesi</button>
+          <button onclick="switchPage('gallery')" data-nav="gallery" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-forest-50 hover:text-forest-900">Galeri & Kaynakça</button>
+        </nav>
+
+        <!-- Mobil Menü Butonu -->
+        <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 rounded-xl bg-slate-100 text-navy hover:bg-slate-200" aria-label="Menüyü Aç">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobil Açýlýr Menü -->
+    <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-5 space-y-1 shadow-lg">
+      <button onclick="switchPage('home'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-navy hover:bg-forest-50">Ana Sayfa</button>
+      <button onclick="switchPage('rights'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-navy hover:bg-forest-50">Hayvan Haklarý Bilgi Merkezi</button>
+      <button onclick="switchPage('law'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-navy hover:bg-forest-50">Türkiye'de Hukuk & Mevzuat</button>
+      <button onclick="switchPage('report'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-navy hover:bg-forest-50">Ýhlal Bildirim Rehberi</button>
+      <button onclick="switchPage('volunteer'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-navy hover:bg-forest-50">Çözüm Önerileri & Gönüllülük</button>
+      <button onclick="switchPage('quiz'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-navy hover:bg-forest-50">Ýnteraktif Bilgi Testi (10 Soru)</button>
+      <button onclick="switchPage('survey'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-navy hover:bg-forest-50">Farkýndalýk Anketi</button>
+      <button onclick="switchPage('tubitak'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-navy hover:bg-forest-50">TÜBÝTAK Bilimsel Araþtýrma</button>
+      <button onclick="switchPage('gallery'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-navy hover:bg-forest-50">Galeri & Akademik Kaynakça</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================== -->
+    <!-- 1. ANA SAYFA                               -->
+    <!-- ========================================== -->
+    <section id="page-home" class="tab-content active">
+      <!-- Hero Alaný -->
+      <div class="relative min-h-[600px] flex items-center bg-navy overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1920&q=80" alt="Doðada birlikte koþan köpekler" class="absolute inset-0 w-full h-full object-cover opacity-40" />
+        <div class="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-forest-900/50"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div class="max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-forest-100 text-xs font-semibold tracking-wider uppercase mb-6">
+              <i data-lucide="microscope" class="w-4 h-4 text-accent"></i>
+              9. Sýnýf TÜBÝTAK Bilimsel Araþtýrma ve Farkýndalýk Projesi
+            </div>
+            <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
+              HER CANLININ <span class="text-accent">YAÞAMA HAKKI</span> VARDIR.
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-200 leading-relaxed mb-10 max-w-2xl">
+              Hayvanlar konuþamaz ama acý çeker, korkar, sever ve yaþamak ister. Onlarýn haklarýný korumak hepimizin sorumluluðudur.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button onclick="switchPage('rights')" class="px-8 py-4 rounded-2xl bg-accent hover:bg-orange-600 text-white font-bold text-base shadow-lg shadow-orange-500/30 transition-all flex items-center gap-2.5">
+                <i data-lucide="book-open" class="w-5 h-5"></i>
+                Hayvan Haklarýný Keþfet
+              </button>
+              <button onclick="switchPage('volunteer')" class="px-8 py-4 rounded-2xl bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 text-white font-bold text-base transition-all flex items-center gap-2.5">
+                <i data-lucide="heart-handshake" class="w-5 h-5 text-accent"></i>
+                Sen de Bir Fark Yarat
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Doðrulanmýþ Referans Kartlarý -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-white rounded-3xl p-6 shadow-xl shadow-slate-900/5 border border-slate-100 card-hover">
+            <div class="w-12 h-12 rounded-2xl bg-forest-50 text-forest-800 flex items-center justify-center mb-4">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <div class="font-display font-extrabold text-2xl text-navy mb-1">5 Temel Özgürlük</div>
+            <p class="text-sm text-slate-600 mb-3">Hayvan refahýnýn küresel bilimsel standardý (Açlýk, rahatsýzlýk, acý, korkudan uzak olma ve doðal davranýþ).</p>
+            <span class="text-xs font-semibold text-forest-800 bg-forest-50 px-2.5 py-1 rounded-lg">Kaynak: WOAH (Dünya Hayvan Saðlýðý Örgütü)</span>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 shadow-xl shadow-slate-900/5 border border-slate-100 card-hover">
+            <div class="w-12 h-12 rounded-2xl bg-orange-50 text-accent flex items-center justify-center mb-4">
+              <i data-lucide="scale" class="w-6 h-6"></i>
+            </div>
+            <div class="font-display font-extrabold text-2xl text-navy mb-1">5199 & 7332</div>
+            <p class="text-sm text-slate-600 mb-3">2021 reformu ile hayvanlar "mal/eþya" statüsünden çýkarýlýp "canlý" kabul edilerek hapis cezasý kapsamýna alýndý.</p>
+            <span class="text-xs font-semibold text-accent bg-orange-50 px-2.5 py-1 rounded-lg">Kaynak: T.C. Resmî Gazete</span>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 shadow-xl shadow-slate-900/5 border border-slate-100 card-hover">
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center mb-4">
+              <i data-lucide="globe" class="w-6 h-6"></i>
+            </div>
+            <div class="font-display font-extrabold text-2xl text-navy mb-1">15 Ekim 1978</div>
+            <p class="text-sm text-slate-600 mb-3">Hayvan Haklarý Evrensel Bildirgesi UNESCO merkezinde ilan edilerek tüm canlýlarýn eþit yaþam hakký vurgulandý.</p>
+            <span class="text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-lg">Kaynak: UNESCO / LFDA</span>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 shadow-xl shadow-slate-900/5 border border-slate-100 card-hover">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-4">
+              <i data-lucide="trees" class="w-6 h-6"></i>
+            </div>
+            <div class="font-display font-extrabold text-2xl text-navy mb-1">Ekosistem Bütünlüðü</div>
+            <p class="text-sm text-slate-600 mb-3">Yaban hayatý ve habitatlarýn korunmasý biyolojik çeþitliliðin ve insan saðlýðýnýn ("Tek Saðlýk") temelidir.</p>
+            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg">Kaynak: UNEP (BM Çevre Programý)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proje Tanýtýmý ve Hýzlý Eriþim -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-100 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-forest-800 bg-forest-50 px-3 py-1 rounded-full">Proje Hakkýnda</span>
+            <h2 class="font-display font-bold text-3xl text-navy">Bilimsel Temelli Toplumsal Farkýndalýk Platformu</h2>
+            <p class="text-slate-600 leading-relaxed">
+              <strong>PATÝ ÝZÝ</strong>, lise düzeyinde (9. sýnýf) geliþtirilen bir TÜBÝTAK araþtýrma projesi kapsamýnda; hayvan haklarý ihlallerinin temelinde yatan bilgi eksikliðini gidermek, 5199 sayýlý kanunu anlaþýlýr kýlmak ve gençlerde empati temelli davranýþ deðiþikliði oluþturmak amacýyla tasarlanmýþtýr.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <button onclick="switchPage('quiz')" class="p-4 rounded-2xl border border-slate-200 hover:border-forest-800 hover:bg-forest-50/40 text-left transition-all flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-forest-900 text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="help-circle" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="font-bold text-navy text-sm">10 Soruluk Bilgi Testi</div>
+                  <div class="text-xs text-slate-500">Hukuki ve bilimsel bilgini ölç</div>
+                </div>
+              </button>
+              <button onclick="switchPage('tubitak')" class="p-4 rounded-2xl border border-slate-200 hover:border-accent hover:bg-orange-50/40 text-left transition-all flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-accent text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="file-text" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="font-bold text-navy text-sm">TÜBÝTAK Araþtýrma Raporu</div>
+                  <div class="text-xs text-slate-500">Hipotez, yöntem ve bulgular</div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=900&q=80" alt="Kedi portresi" class="rounded-3xl w-full h-80 object-cover shadow-lg" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 2. HAYVAN HAKLARI BÝLGÝ MERKEZÝ (9 BAÞLIK) -->
+    <!-- ========================================== -->
+    <section id="page-rights" class="tab-content py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-wider text-forest-800 bg-forest-100 px-3.5 py-1.5 rounded-full">Bilimsel & Etik Rehber</span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-navy mt-4 mb-4">Hayvan Haklarý Bilgi Merkezi</h2>
+          <p class="text-slate-600">Hayvanlarýn temel 9 hakkýný bilimsel temelleri, gerçek örnek olay analizleri ve somut çözüm önerileriyle inceleyin.</p>
+        </div>
+
+        <!-- Arama ve Filtre -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-between items-center mb-10 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+          <div class="relative w-full sm:w-80">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+            <input type="text" id="rights-search" onkeyup="filterRights()" placeholder="Hak veya anahtar kelime ara..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-forest-800" />
+          </div>
+          <div class="flex flex-wrap gap-2 w-full sm:w-auto justify-center" id="rights-filters">
+            <button onclick="setRightCategory('all', this)" class="filter-chip px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-forest-900 text-white">Tümü (9)</button>
+            <button onclick="setRightCategory('temel', this)" class="filter-chip px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Temel Yaþam</button>
+            <button onclick="setRightCategory('refah', this)" class="filter-chip px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Refah & Saðlýk</button>
+            <button onclick="setRightCategory('koruma', this)" class="filter-chip px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Özel Koruma</button>
+          </div>
+        </div>
+
+        <!-- 9 Kart Konteyneri -->
+        <div id="rights-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"></div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 3. TÜRKÝYE'DE HUKUKÝ BÝLGÝLER & MEVZUAT    -->
+    <!-- ========================================== -->
+    <section id="page-law" class="tab-content py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-12">
+          <span class="text-xs font-bold uppercase tracking-wider text-accent bg-orange-100 px-3.5 py-1.5 rounded-full">Hukuki Çerçeve</span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-navy mt-4 mb-4">Türkiye'de Hayvan Haklarý ve Mevzuat</h2>
+          <p class="text-slate-600">5199 Sayýlý Hayvanlarý Koruma Kanunu, 7332 Sayýlý Kanun deðiþiklikleri ve yerel yönetimlerin yasal sorumluluklarý.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Sol Kolon: Kanun Maddeleri -->
+          <div class="lg:col-span-2 space-y-6">
+            <div class="bg-white rounded-3xl p-7 border border-slate-200/80 shadow-sm">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-forest-900 text-white flex items-center justify-center font-bold">1</div>
+                <h3 class="font-display font-bold text-xl text-navy">5199 Sayýlý Hayvanlarý Koruma Kanunu</h3>
+              </div>
+              <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                24 Haziran 2004 tarihinde kabul edilen kanunun temel amacý; hayvanlarýn rahat yaþamalarýný ve hayvanlara iyi ve uygun muamele edilmesini temin etmek, hayvanlarýn acý, ýstýrap ve eziyet çekmelerine karþý en iyi þekilde korunmalarýný, her türlü maðduriyetlerinin önlenmesini saðlamaktýr.
+              </p>
+              <div class="bg-forest-50/70 border border-forest-100 rounded-2xl p-4 text-sm text-forest-900">
+                <strong>Temel Ýlke (Madde 4):</strong> Bütün hayvanlar eþit doðar ve bu Kanun hükümleri çerçevesinde yaþama hakkýna sahiptir. Evcil hayvanlar, türüne özgü hayat þartlarý içinde yaþama özgürlüðüne sahiptir.
+              </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-7 border border-slate-200/80 shadow-sm">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-accent text-white flex items-center justify-center font-bold">2</div>
+                <h3 class="font-display font-bold text-xl text-navy">Kötü Muamele ve Adli Yaptýrýmlar (7332 Sayýlý Kanun)</h3>
+              </div>
+              <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                14 Temmuz 2021'de yürürlüðe giren 7332 sayýlý kanun ile hayvanlar Türk Ceza Kanunu (TCK) ve 5199 sayýlý kanun kapsamýnda <strong>"mal/eþya"</strong> statüsünden çýkarýlarak <strong>"canlý"</strong> statüsüne alýnmýþtýr:
+              </p>
+              <ul class="space-y-2.5 text-sm text-slate-700">
+                <li class="flex items-start gap-2.5"><i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i><span>Nesli yok olma tehlikesi altýndaki bir hayvaný öldürenlere <strong>1 yýldan 5 yýla kadar</strong> hapis cezasý.</span></li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i><span>Bir ev hayvanýný veya evcil hayvaný kasten öldüren kiþiye <strong>6 aydan 4 yýla kadar</strong> hapis cezasý.</span></li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i><span>Hayvanlara cinsel saldýrýda bulunan veya tecavüz eden kiþiye <strong>6 aydan 3 yýla kadar</strong> hapis ve adli para cezasý.</span></li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i><span>Hayvanlara iþkence eden veya acýmasýz ve zalimce muamelede bulunan kiþiye <strong>6 aydan 3 yýla kadar</strong> hapis cezasý.</span></li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i><span>Ev hayvanýný terk eden kiþiye hayvan baþýna idari para cezasý ve kedi/köpeklerde dijital kimliklendirme (mikroçip) zorunluluðu.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-white rounded-3xl p-7 border border-slate-200/80 shadow-sm">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-navy text-white flex items-center justify-center font-bold">3</div>
+                <h3 class="font-display font-bold text-xl text-navy">Yerel Yönetimlerin (Belediyelerin) Sorumluluklarý</h3>
+              </div>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                5199 sayýlý kanun ve ilgili yönetmelikler uyarýnca büyükþehir ve ilçe belediyeleri; sahipsiz veya güçten düþmüþ hayvanlarýn korunmasý amacýyla hayvan bakýmevleri kurmak, bu hayvanlarýn kýsýrlaþtýrýlmasý, aþýlanmasý, dijital kimliklendirilmesi ve rehabilitasyonunu saðlamakla yükümlüdür.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sað Kolon: Resmî Kaynak Baðlantýlarý -->
+          <div class="space-y-6">
+            <div class="bg-forest-900 text-white rounded-3xl p-7 shadow-lg">
+              <h3 class="font-display font-bold text-xl mb-3 flex items-center gap-2">
+                <i data-lucide="external-link" class="w-5 h-5 text-accent"></i>
+                Resmî Mevzuat Baðlantýlarý
+              </h3>
+              <p class="text-forest-100 text-sm mb-6">Kanun metinlerinin en güncel hallerine doðrudan resmî kurumlardan ulaþabilirsiniz:</p>
+              <div class="space-y-3">
+                <a href="https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=5199&MevzuatTur=1&MevzuatTertip=5" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-2xl bg-white/10 hover:bg-white/20 transition-all">
+                  <div class="font-bold text-sm">Mevzuat Bilgi Sistemi (5199 SK)</div>
+                  <div class="text-xs text-forest-100 mt-0.5">mevzuat.gov.tr ›</div>
+                </a>
+                <a href="https://www.resmigazete.gov.tr/eskiler/2021/07/20210714-1.htm" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-2xl bg-white/10 hover:bg-white/20 transition-all">
+                  <div class="font-bold text-sm">7332 Sayýlý Deðiþiklik Kanunu</div>
+                  <div class="text-xs text-forest-100 mt-0.5">resmigazete.gov.tr ›</div>
+                </a>
+                <a href="https://www.tarimorman.gov.tr/DKMP" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-2xl bg-white/10 hover:bg-white/20 transition-all">
+                  <div class="font-bold text-sm">Doða Koruma ve Milli Parklar GM</div>
+                  <div class="text-xs text-forest-100 mt-0.5">tarimorman.gov.tr/DKMP ›</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 4. ÝHLAL BÝLDÝRÝM REHBERÝ                  -->
+    <!-- ========================================== -->
+    <section id="page-report" class="tab-content py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-10 flex items-start gap-3">
+          <i data-lucide="info" class="w-5 h-5 text-amber-700 shrink-0 mt-0.5"></i>
+          <p class="text-sm text-amber-900">
+            <strong>Önemli Bilgilendirme:</strong> Bu platform bir eðitim ve farkýndalýk projesidir; doðrudan ihbar toplayan resmî bir sistem deðildir. Karþýlaþtýðýnýz ihlallerde aþaðýda belirtilen <strong>resmî devlet kanallarýna</strong> baþvurmanýz gerekmektedir.
+          </p>
+        </div>
+
+        <div class="max-w-3xl mb-10">
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-navy mb-3">Hayvan Haklarý Ýhlali Bildirim Rehberi</h2>
+          <p class="text-slate-600">Karþýlaþtýðýnýz duruma göre adým adým izlemeniz gereken güvenli ve hukuki prosedürler:</p>
+        </div>
+
+        <!-- Durum Seçici -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <button onclick="selectScenario(0, this)" class="scenario-btn p-5 rounded-2xl bg-forest-900 text-white text-left shadow-md transition-all">
+            <i data-lucide="heart-pulse" class="w-6 h-6 text-accent mb-2"></i>
+            <div class="font-bold text-base">Yaralý / Hasta Hayvan</div>
+            <div class="text-xs text-forest-100 mt-1">Trafik kazasý veya acil müdahale</div>
+          </button>
+          <button onclick="selectScenario(1, this)" class="scenario-btn p-5 rounded-2xl bg-white text-navy border border-slate-200 hover:border-forest-800 text-left transition-all">
+            <i data-lucide="shield-alert" class="w-6 h-6 text-red-600 mb-2"></i>
+            <div class="font-bold text-base">Þiddet & Ýþkence</div>
+            <div class="text-xs text-slate-500 mt-1">Kasýtlý zarar veya kötü muamele</div>
+          </button>
+          <button onclick="selectScenario(2, this)" class="scenario-btn p-5 rounded-2xl bg-white text-navy border border-slate-200 hover:border-forest-800 text-left transition-all">
+            <i data-lucide="building-2" class="w-6 h-6 text-blue-600 mb-2"></i>
+            <div class="font-bold text-base">Belediye & Bakým Talebi</div>
+            <div class="text-xs text-slate-500 mt-1">Kýsýrlaþtýrma, aþýlama ve barýnak</div>
+          </button>
+          <button onclick="selectScenario(3, this)" class="scenario-btn p-5 rounded-2xl bg-white text-navy border border-slate-200 hover:border-forest-800 text-left transition-all">
+            <i data-lucide="trees" class="w-6 h-6 text-emerald-600 mb-2"></i>
+            <div class="font-bold text-base">Yaban Hayatý Ýhlali</div>
+            <div class="text-xs text-slate-500 mt-1">Kaçak avcýlýk veya doðada yaralý canlý</div>
+          </button>
+        </div>
+
+        <!-- Seçilen Senaryo Detayý -->
+        <div id="scenario-detail" class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm mb-10"></div>
+
+        <!-- Resmî Hatlar -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-red-600 text-white rounded-3xl p-6 shadow-md">
+            <div class="text-xs font-bold uppercase tracking-wider text-red-100 mb-1">Acil Güvenlik & Suç Ýhbarý</div>
+            <div class="font-display font-extrabold text-3xl mb-2">112 / HAYDÝ</div>
+            <p class="text-sm text-red-50">Emniyet Genel Müdürlüðü Hayvan Durum Ýzleme (HAYDÝ) mobil uygulamasý veya 112 Acil Çaðrý Merkezi.</p>
+          </div>
+          <div class="bg-navy text-white rounded-3xl p-6 shadow-md">
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Yerel Yönetim Hizmetleri</div>
+            <div class="font-display font-extrabold text-3xl mb-2">ALO 153</div>
+            <p class="text-sm text-slate-200">Belediye Beyaz Masa hatlarý üzerinden yaralý sokak hayvaný nakli ve rehabilitasyon talepleri.</p>
+          </div>
+          <div class="bg-forest-800 text-white rounded-3xl p-6 shadow-md">
+            <div class="text-xs font-bold uppercase tracking-wider text-forest-100 mb-1">Bakanlýk & Ýdari Baþvuru</div>
+            <div class="font-display font-extrabold text-3xl mb-2">CÝMER / DKMP</div>
+            <p class="text-sm text-forest-50">Tarým ve Orman Bakanlýðý Doða Koruma ve Milli Parklar Þube Müdürlükleri ve CÝMER resmî baþvurularý.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 5. ÇÖZÜM ÖNERÝLERÝ & GÖNÜLLÜLÜK            -->
+    <!-- ========================================== -->
+    <section id="page-volunteer" class="tab-content py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-12">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-forest-800 bg-forest-100 px-3.5 py-1.5 rounded-full">Harekete Geç</span>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-navy mt-4">Çözüm Önerileri ve Gönüllülük</h2>
+          </div>
+          <div class="bg-white px-5 py-3.5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+            <div>
+              <div class="text-xs text-slate-500 font-medium">Kiþisel Sorumluluk Sözün</div>
+              <div class="font-display font-bold text-navy text-lg"><span id="pledge-count">0</span> / 6 Adým Seçildi</div>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-forest-50 text-forest-800 flex items-center justify-center font-bold text-sm" id="pledge-percent">%0</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="volunteer-grid"></div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 6. ÝNTERAKTÝF HAYVAN HAKLARI TESTÝ          -->
+    <!-- ========================================== -->
+    <section id="page-quiz" class="tab-content py-16">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <span class="text-xs font-bold uppercase tracking-wider text-accent bg-orange-100 px-3.5 py-1.5 rounded-full">Etkileþimli Deðerlendirme</span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-navy mt-4 mb-2">Hayvan Haklarý Bilgi Testi</h2>
+          <p class="text-slate-600 text-sm">10 soruluk bilimsel ve hukuki testi çözerek farkýndalýk düzeyini ölç.</p>
+        </div>
+
+        <div id="quiz-container" class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm"></div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 7. FARKINDALIK ANKETÝ                      -->
+    <!-- ========================================== -->
+    <section id="page-survey" class="tab-content py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-10">
+          <span class="text-xs font-bold uppercase tracking-wider text-forest-800 bg-forest-100 px-3.5 py-1.5 rounded-full">Veri & Görüþ Toplama</span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-navy mt-4 mb-3">Toplumsal Farkýndalýk Anketi</h2>
+          <p class="text-slate-600 text-sm">Aþaðýdaki 5 temel boyutta görüþlerinizi paylaþýn. Oturum içi gerçek yanýtlar ile bilimsel literatür referans daðýlýmý ayrý grafiklerde gösterilir.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <!-- Anket Formu -->
+          <div class="lg:col-span-6 bg-white rounded-3xl p-7 border border-slate-200 shadow-sm">
+            <h3 class="font-display font-bold text-xl text-navy mb-5">Görüþünü Paylaþ (1: Kesinlikle Katýlmýyorum – 5: Kesinlikle Katýlýyorum)</h3>
+            <form id="survey-form" onsubmit="submitSurvey(event)" class="space-y-5">
+              <div>
+                <label class="block text-sm font-semibold text-navy mb-2">1. Hayvan haklarý konusunda yeterli bilgiye sahip olduðumu düþünüyorum.</label>
+                <input type="range" min="1" max="5" value="3" id="q1" oninput="this.nextElementSibling.value = this.value" class="w-full accent-forest-800" />
+                <output class="text-xs font-bold text-forest-800">3</output> / 5
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-navy mb-2">2. Evcil hayvan edinirken satýn almak yerine barýnaktan sahiplenme tercih edilmelidir.</label>
+                <input type="range" min="1" max="5" value="5" id="q2" oninput="this.nextElementSibling.value = this.value" class="w-full accent-forest-800" />
+                <output class="text-xs font-bold text-forest-800">5</output> / 5
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-navy mb-2">3. Sokak hayvanlarýnýn beslenme ve barýnma ihtiyaçlarý toplumsal ortak sorumluluktur.</label>
+                <input type="range" min="1" max="5" value="4" id="q3" oninput="this.nextElementSibling.value = this.value" class="w-full accent-forest-800" />
+                <output class="text-xs font-bold text-forest-800">4</output> / 5
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-navy mb-2">4. Hayvanlara yönelik þiddet uygulayanlara verilen yasal yaptýrýmlar caydýrýcý olmalýdýr.</label>
+                <input type="range" min="1" max="5" value="5" id="q4" oninput="this.nextElementSibling.value = this.value" class="w-full accent-forest-800" />
+                <output class="text-xs font-bold text-forest-800">5</output> / 5
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-navy mb-2">5. Okullarda hayvan haklarý ve doða bilinci eðitimi zorunlu ders/etkinlik olmalýdýr.</label>
+                <input type="range" min="1" max="5" value="4" id="q5" oninput="this.nextElementSibling.value = this.value" class="w-full accent-forest-800" />
+                <output class="text-xs font-bold text-forest-800">4</output> / 5
+              </div>
+              <button type="submit" class="w-full py-3.5 rounded-2xl bg-forest-900 hover:bg-forest-800 text-white font-bold text-sm transition-all">
+                Anonim Yanýtý Gönder
+              </button>
+            </form>
+            <div id="survey-feedback" class="hidden mt-4 p-3.5 rounded-xl bg-forest-50 text-forest-900 text-xs font-semibold">
+              Yanýtýnýz anonim olarak kaydedildi ve saðdaki "Canlý Oturum Verileri" grafiðine eklendi!
+            </div>
+          </div>
+
+          <!-- Grafikler -->
+          <div class="lg:col-span-6 space-y-6">
+            <!-- Canlý Oturum Verisi -->
+            <div class="bg-white rounded-3xl p-7 border border-slate-200 shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-display font-bold text-lg text-navy">Canlý Oturum Yanýtlarý (Gerçek Veri)</h3>
+                <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-forest-100 text-forest-900" id="live-count-badge">Katýlýmcý: 0</span>
+              </div>
+              <div id="live-chart" class="space-y-3 text-sm text-slate-500">
+                <p class="py-6 text-center bg-slate-50 rounded-2xl">Henüz anket yanýtý gönderilmedi. Sol taraftan ilk yanýtý göndererek canlý grafiði oluþturabilirsiniz.</p>
+              </div>
+            </div>
+
+            <!-- Örnek Referans Daðýlýmý -->
+            <div class="bg-slate-900 text-white rounded-3xl p-7 shadow-sm">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-display font-bold text-lg">Örnek Pilot Daðýlým (Temsili Gösterim)</h3>
+                <span class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30">ÖRNEK VERÝ</span>
+              </div>
+              <p class="text-xs text-slate-400 mb-5">Bilimsel þeffaflýk gereði bu grafik gerçek saha verisi deðildir; anket sisteminin çalýþma mantýðýný göstermek için hazýrlanmýþ örnek modeldir.</p>
+              <div class="space-y-3 text-xs">
+                <div>
+                  <div class="flex justify-between mb-1"><span>Sahiplenme Bilinci</span><span class="text-accent font-bold">4.6 / 5.0</span></div>
+                  <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-accent h-full rounded-full" style="width: 92%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1"><span>Þiddete Karþý Yaptýrým Talebi</span><span class="text-accent font-bold">4.8 / 5.0</span></div>
+                  <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-accent h-full rounded-full" style="width: 96%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1"><span>Sokak Hayvanlarýna Destek</span><span class="text-accent font-bold">4.3 / 5.0</span></div>
+                  <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-accent h-full rounded-full" style="width: 86%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1"><span>5199 Sayýlý Kanun Bilgi Düzeyi</span><span class="text-amber-300 font-bold">2.9 / 5.0</span></div>
+                  <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-amber-400 h-full rounded-full" style="width: 58%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 8. PROJE VE BÝLÝMSEL ARAÞTIRMA (TÜBÝTAK)   -->
+    <!-- ========================================== -->
+    <section id="page-tubitak" class="tab-content py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-forest-800 bg-forest-100 px-3.5 py-1.5 rounded-full">TÜBÝTAK 2204-A Lise Öðrencileri Araþtýrma Projeleri</span>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-navy mt-3">Bilimsel Araþtýrma Dosyasý</h2>
+          </div>
+          <button onclick="toggleEditResearch()" id="edit-research-btn" class="px-5 py-2.5 rounded-xl bg-navy hover:bg-slate-800 text-white text-sm font-semibold flex items-center gap-2 transition-all">
+            <i data-lucide="edit-3" class="w-4 h-4"></i>
+            Araþtýrmacý Notlarýný Düzenle
+          </button>
+        </div>
+
+        <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 mb-8 text-sm text-blue-900">
+          <strong>Bilimsel Dürüstlük Notu:</strong> Bu bölümde henüz tamamlanmamýþ deney veya saha verileri uydurulmamýþtýr. Aþaðýdaki 9 akademik baþlýk, araþtýrmacý öðrencinin kendi gerçek verilerini ve gözlemlerini girebileceði þablon yapýsýndadýr.
+        </div>
+
+        <div id="research-sections" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 9. GÖRSEL GALERÝ & KAYNAKÇA                -->
+    <!-- ========================================== -->
+    <section id="page-gallery" class="tab-content py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+        <!-- Galeri -->
+        <div>
+          <div class="max-w-3xl mb-10">
+            <span class="text-xs font-bold uppercase tracking-wider text-accent bg-orange-100 px-3.5 py-1.5 rounded-full">Görsel Farkýndalýk</span>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-navy mt-4 mb-3">Galeri ve Farkýndalýk Posterleri</h2>
+            <p class="text-slate-600 text-sm">Doðadaki ve yaþam alanlarýmýzdaki dostlarýmýzdan kareler ve paylaþýlabilir farkýndalýk mesajlarý.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div class="group relative rounded-3xl overflow-hidden shadow-md h-72">
+              <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80" alt="Mutlu köpek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent flex items-end p-6">
+                <p class="text-white font-display font-bold text-lg">"Satýn Alma, Sahiplen: Bir Canýn Hayatýný Deðiþtir."</p>
+              </div>
+            </div>
+            <div class="group relative rounded-3xl overflow-hidden shadow-md h-72">
+              <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=800&q=80" alt="Sokak kedisi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent flex items-end p-6">
+                <p class="text-white font-display font-bold text-lg">"Kapýnýn Önüne Bir Kap Su, Bir Kap Sevgi Koy."</p>
+              </div>
+            </div>
+            <div class="group relative rounded-3xl overflow-hidden shadow-md h-72">
+              <img src="https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=800&q=80" alt="Tilki yaban hayatý" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent flex items-end p-6">
+                <p class="text-white font-display font-bold text-lg">"Doðal Yaþam Alanlarý Onlarýn Evidir, Koru."</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slogan Kartlarý -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="bg-forest-900 text-white rounded-3xl p-7 flex flex-col justify-between">
+              <p class="font-display font-bold text-xl leading-snug mb-6">“Bir milletin büyüklüðü ve ahlaki geliþimi, hayvanlara olan davranýþ biçimi ile deðerlendirilebilir.”</p>
+              <button onclick="copySlogan(this, 'Bir milletin büyüklüðü ve ahlaki geliþimi, hayvanlara olan davranýþ biçimi ile deðerlendirilebilir.')" class="self-start text-xs font-bold px-4 py-2 rounded-xl bg-white/15 hover:bg-white/25 transition-all">Sloganý Kopyala</button>
+            </div>
+            <div class="bg-accent text-white rounded-3xl p-7 flex flex-col justify-between">
+              <p class="font-display font-bold text-xl leading-snug mb-6">“Hayvanlar eþya deðil, hissedebilen ve acý çeken canlýlardýr. 5199 Sayýlý Kanun ile haklarýnýn yanýndayýz!”</p>
+              <button onclick="copySlogan(this, 'Hayvanlar eþya deðil, hissedebilen ve acý çeken canlýlardýr. 5199 Sayýlý Kanun ile haklarýnýn yanýndayýz!')" class="self-start text-xs font-bold px-4 py-2 rounded-xl bg-black/15 hover:bg-black/25 transition-all">Sloganý Kopyala</button>
+            </div>
+            <div class="bg-navy text-white rounded-3xl p-7 flex flex-col justify-between">
+              <p class="font-display font-bold text-xl leading-snug mb-6">“Sessiz dostlarýmýzýn sesi olmak bir lütuf deðil, insanlýk ve hukuk sorumluluðudur.”</p>
+              <button onclick="copySlogan(this, 'Sessiz dostlarýmýzýn sesi olmak bir lütuf deðil, insanlýk ve hukuk sorumluluðudur.')" class="self-start text-xs font-bold px-4 py-2 rounded-xl bg-white/15 hover:bg-white/25 transition-all">Sloganý Kopyala</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Akademik ve Resmî Kaynakça -->
+        <div class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-sm">
+          <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-navy mb-2">Bilimsel ve Resmî Kaynakça</h2>
+          <p class="text-slate-600 text-sm mb-8">Platformdaki tüm hukuki ve bilimsel içerikler aþaðýdaki doðrulanmýþ kurum yayýnlarýna dayanmaktadýr:</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <a href="https://www.tubitak.gov.tr" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-slate-200 hover:border-forest-800 transition-all">
+              <div class="font-bold text-navy">1. TÜBÝTAK (Türkiye Bilimsel ve Teknolojik Araþtýrma Kurumu)</div>
+              <div class="text-xs text-slate-500 mt-1">2204-A Lise Öðrencileri Araþtýrma Projeleri Yarýþmasý Rehberi – tubitak.gov.tr</div>
+            </a>
+            <a href="https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=5199&MevzuatTur=1&MevzuatTertip=5" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-slate-200 hover:border-forest-800 transition-all">
+              <div class="font-bold text-navy">2. T.C. Resmî Gazete & Mevzuat Bilgi Sistemi</div>
+              <div class="text-xs text-slate-500 mt-1">5199 Sayýlý Hayvanlarý Koruma Kanunu ve 7332 Sayýlý Kanun – mevzuat.gov.tr</div>
+            </a>
+            <a href="https://www.tarimorman.gov.tr/DKMP" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-slate-200 hover:border-forest-800 transition-all">
+              <div class="font-bold text-navy">3. T.C. Tarým ve Orman Bakanlýðý (DKMP)</div>
+              <div class="text-xs text-slate-500 mt-1">Doða Koruma ve Milli Parklar Genel Müdürlüðü Mevzuat ve Rehberleri – tarimorman.gov.tr</div>
+            </a>
+            <a href="https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-welfare/" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-slate-200 hover:border-forest-800 transition-all">
+              <div class="font-bold text-navy">4. WOAH (Dünya Hayvan Saðlýðý Örgütü)</div>
+              <div class="text-xs text-slate-500 mt-1">Terrestrial Animal Health Code & Five Freedoms Standartlarý – woah.org</div>
+            </a>
+            <a href="https://www.unep.org" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-slate-200 hover:border-forest-800 transition-all">
+              <div class="font-bold text-navy">5. UNEP (Birleþmiþ Milletler Çevre Programý)</div>
+              <div class="text-xs text-slate-500 mt-1">Biyoçeþitlilik, Yaban Hayatý Koruma ve Tek Saðlýk Raporlarý – unep.org</div>
+            </a>
+            <a href="https://www.fondation-droit-animal.org" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-slate-200 hover:border-forest-800 transition-all">
+              <div class="font-bold text-navy">6. UNESCO Hayvan Haklarý Evrensel Bildirgesi (1978)</div>
+              <div class="text-xs text-slate-500 mt-1">Universal Declaration of Animal Rights Arþivi – fondation-droit-animal.org</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-navy text-slate-300 py-12 mt-16 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-forest-800 text-white flex items-center justify-center">
+          <i data-lucide="paw-print" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <div class="font-display font-bold text-white">PATÝ ÝZÝ</div>
+          <div class="text-xs text-slate-400">Hayvan Haklarýný Koruma ve Toplumsal Farkýndalýk Platformu</div>
+        </div>
+      </div>
+      <div class="text-xs text-slate-400 text-center md:text-right">
+        9. Sýnýf TÜBÝTAK Bilimsel Araþtýrma Projesi Kapsamýnda Hazýrlanmýþtýr • Tüm Ýçerikler Bilimsel ve Hukuki Kaynaklara Dayalýdýr.
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT UYGULAMA MANTIÐI -->
+  <script>
+    // 1. SAYFA GEÇÝÞ SÝSTEMÝ
+    function switchPage(pageId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById('page-' + pageId);
+      if (target) target.classList.add('active');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        if (btn.dataset.nav === pageId) {
+          btn.className = 'nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold bg-forest-900 text-white';
+        } else {
+          btn.className = 'nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-forest-50 hover:text-forest-900';
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    // 2. HAYVAN HAKLARI BÝLGÝ MERKEZÝ VERÝLERÝ (9 TEMEL HAK)
+    const rightsData = [
+      {
+        title: "1. Yaþam Hakký",
+        cat: "temel",
+        icon: "heart",
+        science: "Nörobiyolojik araþtýrmalar (Cambridge Bilinç Deklarasyonu, 2012) omurgalý ve pek çok omurgasýz hayvanýn bilinçli farkýndalýða ve acý hissine sahip olduðunu kanýtlamýþtýr.",
+        caseStudy: "Örnek Olay: Saðlýklý bir sokak hayvanýnýn keyfi olarak yaþamýna son verilmesi hem etik hem hukuki suçtur.",
+        solution: "Çözüm: 5199 sayýlý kanun kapsamýnda tüm hayvanlarýn doðuþtan gelen yaþama hakkýnýn toplumsal eðitimle güvence altýna alýnmasý."
+      },
+      {
+        title: "2. Ýþkence ve Kötü Muameleden Korunma",
+        cat: "temel",
+        icon: "shield-off",
+        science: "Fiziksel þiddet ve kronik stres, hayvanlarda kortizol seviyesini yükselterek baðýþýklýk sistemini çökertir ve kalýcý davranýþ travmalarýna yol açar.",
+        caseStudy: "Örnek Olay: Hayvan dövüþleri düzenlemek veya fiziksel þiddet uygulamak 7332 sayýlý kanun ile hapis cezasý kapsamýna alýnmýþtýr.",
+        solution: "Çözüm: Þiddet vakalarýnýn derhal HAYDÝ ve 112 üzerinden belgelenerek adli makamlara bildirilmesi."
+      },
+      {
+        title: "3. Aç ve Susuz Býrakýlmama",
+        cat: "refah",
+        icon: "utensils",
+        science: "WOAH'ýn '5 Temel Özgürlük' ilkesinin ilki açlýk ve susuzluktan uzak olmadýr. Özellikle yaz aylarýnda dehidrasyon sokak hayvanlarýnda böbrek yetmezliðine yol açar.",
+        caseStudy: "Örnek Olay: Sýcak yaz günlerinde su bulamayan kuþ ve kedilerin yaþam kaybý yaþamasý.",
+        solution: "Çözüm: Mahallelerde düzenli, hijyenik beslenme noktalarý ve temiz su kaplarý oluþturulmasý."
+      },
+      {
+        title: "4. Barýnma ve Uygun Yaþam Koþullarý",
+        cat: "refah",
+        icon: "home",
+        science: "Türlere özgü termoregülasyon (vücut ýsýsý dengesi) ve hareket alaný saðlanmadýðýnda hayvanlarda stereotipik stres davranýþlarý geliþir.",
+        caseStudy: "Örnek Olay: Kýsa zincire baðlý tutulan veya dar kafeslerde güneþ/yaðmur altýnda býrakýlan ev hayvanlarý.",
+        solution: "Çözüm: Hayvanlarýn türüne uygun geniþlikte, hava koþullarýndan koruyan yalýtýmlý barýnaklarýn saðlanmasý."
+      },
+      {
+        title: "5. Saðlýk ve Veteriner Hizmetlerine Eriþim",
+        cat: "refah",
+        icon: "stethoscope",
+        science: "Koruyucu hekimlik (aþýlama ve parazit kontrolü), hem hayvan refahý hem de zoonotik hastalýklarýn önlenmesi ('Tek Saðlýk' yaklaþýmý) için kritiktir.",
+        caseStudy: "Örnek Olay: Trafik kazasý geçiren bir sokak hayvanýnýn tedavi edilmemesi sonucu kalýcý sakatlýk yaþamasý.",
+        solution: "Çözüm: Belediyelerin 7/24 acil veteriner ambulans hizmetlerinin güçlendirilmesi ve kýsýrlaþtýrma seferberliði."
+      },
+      {
+        title: "6. Doðal Yaþam Alanlarýnýn Korunmasý",
+        cat: "koruma",
+        icon: "trees",
+        science: "UNEP raporlarýna göre habitat parçalanmasý, yaban hayvaný popülasyonlarýnýn azalmasýndaki birincil etkendir.",
+        caseStudy: "Örnek Olay: Orman tahribatý ve sulak alanlarýn kurutulmasý nedeniyle göçmen kuþlarýn ve yaban memelilerinin yaþam alanýný kaybetmesi.",
+        solution: "Çözüm: Milli parklarýn ve koruma alanlarýnýn geniþletilmesi, ekolojik köprülerin inþa edilmesi."
+      },
+      {
+        title: "7. Deney Hayvanlarýnýn Korunmasý (3R Ýlkesi)",
+        cat: "koruma",
+        icon: "flask-conical",
+        science: "Bilimsel araþtýrmalarda Russell ve Burch'un 3R kuralý (Replacement: Yerine Koyma, Reduction: Azaltma, Refinement: Ýyileþtirme) uluslararasý etik standarttýr.",
+        caseStudy: "Örnek Olay: Kozmetik testlerinde hayvan deneylerinin yasaklanmasý ve yerine yapay doku modellerinin kullanýlmasý.",
+        solution: "Çözüm: Bilgisayar simülasyonlarý ve hücre kültürü gibi alternatif yöntemlerin teþvik edilmesi, etik kurul denetimi."
+      },
+      {
+        title: "8. Sokak Hayvanlarýnýn Haklarý",
+        cat: "temel",
+        icon: "paw-print",
+        science: "Kentsel ekosistemin bir parçasý olan sokak hayvanlarýnýn popülasyon kontrolünde bilimsel olarak kanýtlanmýþ en etkili yöntem 'Yakala-Kýsýrlaþtýr-Aþýla-Yerinde Yaþat' modelidir.",
+        caseStudy: "Örnek Olay: Kýsýrlaþtýrma yapýlmadan hayvanlarýn baþka bölgelere býrakýlmasýnýn kontrolsüz üremeye ve besin rekabetine yol açmasý.",
+        solution: "Çözüm: Yerel yönetimlerin düzenli kýsýrlaþtýrma ve mikroçip kayýt sistemini etkin uygulamasý."
+      },
+      {
+        title: "9. Hayvanlarýn Terk Edilmesinin Sonuçlarý",
+        cat: "koruma",
+        icon: "alert-triangle",
+        science: "Ev ortamýna alýþmýþ hayvanlar doðada veya sokakta avlanma ve tehlikelerden korunma becerisine sahip deðildir; terk edilme yüksek ölüm oranýyla sonuçlanýr.",
+        caseStudy: "Örnek Olay: Tatil dönemlerinde veya heves geçtikten sonra sokaða býrakýlan evcil köpek ve kediler.",
+        solution: "Çözüm: Mikroçip takibi ile terk edenlere idari yaptýrým uygulanmasý ve sahiplenme öncesi sorumluluk eðitimi."
+      }
+    ];
+
+    let currentCategory = 'all';
+
+    function renderRights() {
+      const query = document.getElementById('rights-search').value.toLowerCase();
+      const grid = document.getElementById('rights-grid');
+      const filtered = rightsData.filter(item => {
+        const matchCat = currentCategory === 'all' || item.cat === currentCategory;
+        const matchText = item.title.toLowerCase().includes(query) || item.science.toLowerCase().includes(query) || item.solution.toLowerCase().includes(query);
+        return matchCat && matchText;
+      });
+
+      grid.innerHTML = filtered.map(item => `
+        <div class="bg-white rounded-3xl p-7 border border-slate-200/80 shadow-sm card-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-forest-50 text-forest-800 flex items-center justify-center mb-5">
+              <i data-lucide="${item.icon}" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-navy mb-3">${item.title}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4"><strong>Bilimsel Temel:</strong> ${item.science}</p>
+            <div class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-100 text-xs text-amber-950 mb-3">
+              ${item.caseStudy}
+            </div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-forest-50/80 border border-forest-100 text-xs text-forest-900 font-medium">
+            ${item.solution}
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function setRightCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-chip').forEach(c => {
+        c.className = 'filter-chip px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200';
+      });
+      btn.className = 'filter-chip px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-forest-900 text-white';
+      renderRights();
+    }
+
+    function filterRights() {
+      renderRights();
+    }
+
+    // 3. ÝHLAL BÝLDÝRÝM REHBERÝ SENARYOLARI
+    const scenarios = [
+      {
+        title: "Yaralý veya Hasta Sokak Hayvaný ile Karþýlaþýldýðýnda",
+        steps: [
+          "Önce kendi güvenliðinizi saðlayýn; acý çeken bir hayvan savunma içgüdüsüyle ýsýrabilir veya týrmalayabilir.",
+          "Hayvaný mümkünse güvenli, trafikten uzak bir kenara alýn ve konum bilgisini (sokak/mahalle) netleþtirin.",
+          "Bulunduðunuz ilçe veya büyükþehir belediyesinin ALO 153 / Veteriner Ýþleri Müdürlüðü acil müdahale hattýný arayýn.",
+          "Ekip gelene kadar hayvanýn yanýnda bekleyin ve durumun aciliyetini fotoðrafla belgeleyin."
+        ]
+      },
+      {
+        title: "Þiddet, Ýþkence veya Kötü Muamele Görüldüðünde",
+        steps: [
+          "Kendi can güvenliðinizi tehlikeye atmadan olayý telefonunuzla video veya fotoðraf olarak kayýt altýna alýn.",
+          "Emniyet Genel Müdürlüðü'nün HAYDÝ mobil uygulamasý üzerinden veya doðrudan 112 Acil Çaðrý Merkezi'ni arayarak suç ihbarýnda bulunun.",
+          "5199 sayýlý kanunun 7332 sayýlý deðiþiklik maddeleri gereði olayýn adli suç kapsamýna girdiðini belirterek tutanak tutulmasýný talep edin.",
+          "Tarým ve Orman Bakanlýðý Doða Koruma ve Milli Parklar (DKMP) Ýl Þube Müdürlüðü'ne de resmi dilekçe/CÝMER ile baþvurun."
+        ]
+      },
+      {
+        title: "Belediye Bakým, Kýsýrlaþtýrma ve Barýnak Talepleri",
+        steps: [
+          "Mahallenizdeki kýsýrlaþtýrýlmamýþ (kulaðýnda küpe bulunmayan) sokak hayvanlarýný tespit edin.",
+          "Belediyenin Beyaz Masa (ALO 153) veya e-Belediye sistemi üzerinden kayýt numarasý alarak baþvuru oluþturun.",
+          "Baþvurunuzun takip numarasýný saklayýn; yasal süre içinde iþlem yapýlmazsa CÝMER üzerinden denetim talebinde bulunun."
+        ]
+      },
+      {
+        title: "Yaban Hayatý ve Kaçak Avcýlýk Ýhlalleri",
+        steps: [
+          "Doðada yaralý bulunan yýrtýcý kuþ, tilki, kirpi gibi yaban hayvanlarýna doðrudan çýplak elle müdahale etmeyin.",
+          "112 Acil Çaðrý Merkezi üzerinden Doða Koruma ve Milli Parklar (DKMP) ekiplerine veya Jandarma Çevre, Doða ve Hayvanlarý Koruma Timi'ne haber verin.",
+          "Kaçak avcýlýk þüphesinde araç plakasý ve konum bilgisini güvenlik güçlerine iletin."
+        ]
+      }
+    ];
+
+    function selectScenario(idx, btn) {
+      document.querySelectorAll('.scenario-btn').forEach(b => {
+        b.className = 'scenario-btn p-5 rounded-2xl bg-white text-navy border border-slate-200 hover:border-forest-800 text-left transition-all';
+      });
+      if (btn) {
+        btn.className = 'scenario-btn p-5 rounded-2xl bg-forest-900 text-white text-left shadow-md transition-all';
+      }
+      const sc = scenarios[idx];
+      document.getElementById('scenario-detail').innerHTML = `
+        <h3 class="font-display font-bold text-2xl text-navy mb-5">${sc.title}</h3>
+        <ol class="space-y-3.5">
+          ${sc.steps.map((step, i) => `
+            <li class="flex items-start gap-3.5 text-slate-700 text-sm leading-relaxed">
+              <span class="w-7 h-7 rounded-full bg-forest-100 text-forest-900 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">${i + 1}</span>
+              <span>${step}</span>
+            </li>
+          `).join('')}
+        </ol>
+      `;
+    }
+
+    // 4. GÖNÜLLÜLÜK VE KÝÞÝSEL SÖZ TAKÝBÝ
+    const volunteerItems = [
+      { id: 1, title: "Düzenli Su ve Mama Desteði", desc: "Özellikle sýcak yaz ve soðuk kýþ günlerinde kapýnýn önüne temiz su ve kuru mama býrakmak." },
+      { id: 2, title: "Satýn Alma Yerine Sahiplenme", desc: "Evcil hayvan edinmek isteyen çevremizi petshoplar yerine yerel barýnaklardan sahiplenmeye yönlendirmek." },
+      { id: 3, title: "Sorumlu Sahiplik Bilinci", desc: "Sahiplenilen hayvanýn mikroçip kaydýný, aþýlarýný ve kýsýrlaþtýrmasýný eksiksiz yaptýrmak." },
+      { id: 4, title: "Barýnak Ziyareti ve Gönüllülük", desc: "Belediye hayvan bakýmevlerini düzenli ziyaret ederek mama desteði ve sosyal etkileþim saðlamak." },
+      { id: 5, title: "Çevre ve Habitat Temizliði", desc: "Doðaya býrakýlan cam, plastik ve kesici atýklarýn hayvanlara zarar vermesini önlemek için çevre temizliði yapmak." },
+      { id: 6, title: "Dijital Farkýndalýk Elçiliði", desc: "5199 sayýlý kanun ve hayvan haklarý konusunda doðrulanmýþ bilimsel bilgileri sosyal medyada paylaþmak." }
+    ];
+    let selectedPledges = new Set();
+
+    function renderVolunteer() {
+      const grid = document.getElementById('volunteer-grid');
+      grid.innerHTML = volunteerItems.map(item => {
+        const active = selectedPledges.has(item.id);
+        return `
+          <div onclick="togglePledge(${item.id})" class="cursor-pointer rounded-3xl p-7 border-2 transition-all ${active ? 'bg-forest-50/70 border-forest-800 shadow-md' : 'bg-white border-slate-200/80 hover:border-forest-700'}">
+            <div class="flex justify-between items-start mb-4">
+              <span class="text-xs font-bold px-3 py-1 rounded-full ${active ? 'bg-forest-900 text-white' : 'bg-slate-100 text-slate-600'}">Adým 0${item.id}</span>
+              <div class="w-7 h-7 rounded-full flex items-center justify-center ${active ? 'bg-accent text-white' : 'border-2 border-slate-300'}">
+                ${active ? '<i data-lucide="check" class="w-4 h-4"></i>' : ''}
+              </div>
+            </div>
+            <h3 class="font-display font-bold text-xl text-navy mb-2">${item.title}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4">${item.desc}</p>
+            <div class="text-xs font-bold ${active ? 'text-forest-900' : 'text-accent'}">
+              ${active ? '? Bu sorumluluðu üstlendin' : '+ Söz vermek için týkla'}
+            </div>
+          </div>
+        `;
+      }).join('');
+      document.getElementById('pledge-count').textContent = selectedPledges.size;
+      document.getElementById('pledge-percent').textContent = '%' + Math.round((selectedPledges.size / volunteerItems.length) * 100);
+      lucide.createIcons();
+    }
+
+    function togglePledge(id) {
+      if (selectedPledges.has(id)) selectedPledges.delete(id);
+      else selectedPledges.add(id);
+      renderVolunteer();
+    }
+
+    // 5. ÝNTERAKTÝF 10 SORULUK HAYVAN HAKLARI TESTÝ
+    const quizQuestions = [
+      {
+        q: "Türkiye'de hayvanlarýn korunmasýný düzenleyen temel kanun aþaðýdakilerden hangisidir?",
+        options: ["5199 Sayýlý Hayvanlarý Koruma Kanunu", "4857 Sayýlý Ýþ Kanunu", "2872 Sayýlý Çevre Kanunu", "6502 Sayýlý Tüketici Kanunu"],
+        answer: 0,
+        explanation: "2004 yýlýnda yürürlüðe giren 5199 Sayýlý Hayvanlarý Koruma Kanunu, Türkiye'de hayvan haklarý ve refahýný düzenleyen temel yasadýr."
+      },
+      {
+        q: "2021 yýlýnda kabul edilen 7332 sayýlý kanun ile hayvanlarýn hukuki statüsünde hangi köklü deðiþiklik yapýlmýþtýr?",
+        options: ["Sadece para cezalarý artýrýlmýþtýr", "Hayvanlar 'mal/eþya' statüsünden çýkarýlýp 'canlý' kabul edilerek hapis cezasý getirilmiþtir", "Yalnýzca evcil kediler koruma altýna alýnmýþtýr", "Belediyelerin sorumluluðu kaldýrýlmýþtýr"],
+        answer: 1,
+        explanation: "7332 sayýlý kanun ile hayvanlar Türk Ceza Kanunu kapsamýnda 'mal' olmaktan çýkarýlmýþ ve kasten öldürme/iþkence suçlarýna hapis cezasý getirilmiþtir."
+      },
+      {
+        q: "Dünya Hayvan Saðlýðý Örgütü (WOAH) tarafýndan tanýmlanan hayvan refahý standardý aþaðýdakilerden hangisidir?",
+        options: ["3R Kuralý", "5 Temel Özgürlük (Five Freedoms)", "Kyoto Protokolü", "Tek Saðlýk Bildirgesi"],
+        answer: 1,
+        explanation: "WOAH'ýn 5 Temel Özgürlük ilkesi; açlýk/susuzluktan, rahatsýzlýktan, acý/hastalýktan, korku/stresten uzak olmayý ve doðal davranýþlarý sergileyebilmeyi kapsar."
+      },
+      {
+        q: "Bilimsel araþtýrmalarda deney hayvanlarýnýn korunmasý için uygulanan '3R Ýlkesi' neyi ifade eder?",
+        options: ["Yerine Koyma, Azaltma, Ýyileþtirme", "Üretme, Satma, Koruma", "Besleme, Barýndýrma, Aþýlama", "Yakalama, Kýsýrlaþtýrma, Býrakma"],
+        answer: 0,
+        explanation: "3R (Replacement, Reduction, Refinement); hayvan yerine alternatif yöntem kullanmayý, kullanýlan hayvan sayýsýný azaltmayý ve refahý iyileþtirmeyi amaçlar."
+      },
+      {
+        q: "Hayvan Haklarý Evrensel Bildirgesi hangi yýl ve hangi uluslararasý kuruluþun merkezinde ilan edilmiþtir?",
+        options: ["1945 - Birleþmiþ Milletler", "1978 - UNESCO", "1992 - Avrupa Konseyi", "2004 - Dünya Saðlýk Örgütü"],
+        answer: 1,
+        explanation: "Hayvan Haklarý Evrensel Bildirgesi 15 Ekim 1978 tarihinde Paris'teki UNESCO merkezinde ilan edilmiþtir."
+      },
+      {
+        q: "Hayvanlara yönelik þiddet ve iþkence suçlarýna anýnda müdahale etmek için Emniyet Genel Müdürlüðü tarafýndan kurulan birim/uygulama hangisidir?",
+        options: ["AFAD", "HAYDÝ (Hayvan Durum Ýzleme)", "UMKE", "TÜÝK"],
+        answer: 1,
+        explanation: "HAYDÝ mobil uygulamasý ve 112 Acil Çaðrý Merkezi üzerinden hayvanlara yönelik suçlara kolluk kuvvetleri doðrudan müdahale etmektedir."
+      },
+      {
+        q: "Sokak hayvanlarýnýn popülasyon kontrolünde bilimsel olarak en etkili ve etik kabul edilen yöntem hangisidir?",
+        options: ["Hayvanlarý þehir dýþýna býrakmak", "Yakala - Kýsýrlaþtýr - Aþýla - Yerinde Yaþat", "Sürekli kafeste tutmak", "Beslemeyi yasaklamak"],
+        answer: 1,
+        explanation: "Bilimsel çalýþmalar, kýsýrlaþtýrýlýp aþýlanan hayvanlarýn kendi bölgelerinde yaþatýlmasýnýn kontrolsüz üremeyi ve bölge çatýþmalarýný önlediðini göstermektedir."
+      },
+      {
+        q: "Evcil kedi ve köpeklerin terk edilmesini önlemek ve saðlýk takibini yapmak amacýyla zorunlu tutulan uygulama nedir?",
+        options: ["Dijital kimliklendirme (Mikroçip) ve pasaport", "Sadece tasma takmak", "Aylýk belediye harcý", "Zorunlu eðitim sertifikasý"],
+        answer: 0,
+        explanation: "Tarým ve Orman Bakanlýðý yönetmeliði gereði evcil kedi ve köpeklere deri altý mikroçip uygulanmasý ve PETVET sistemine kaydedilmesi zorunludur."
+      },
+      {
+        q: "Ýnsan, hayvan ve ekosistem saðlýðýnýn birbirinden ayrýlamaz bir bütün olduðunu savunan bilimsel yaklaþým hangisidir?",
+        options: ["Tek Saðlýk (One Health)", "Sýfýr Atýk", "Yeþil Mutabakat", "Biyomimikri"],
+        answer: 0,
+        explanation: "UNEP ve WHO tarafýndan desteklenen 'Tek Saðlýk' yaklaþýmý, hayvan saðlýðýnýn korunmasýnýn insan ve çevre saðlýðý için zorunlu olduðunu ortaya koyar."
+      },
+      {
+        q: "Aþaðýdakilerden hangisi 5199 sayýlý kanuna göre yerel yönetimlerin (belediyelerin) temel görevlerinden biridir?",
+        options: ["Evcil hayvan ticareti yapmak", "Sahipsiz ve güçten düþmüþ hayvanlar için bakýmevi kurmak ve rehabilite etmek", "Yaban hayvanlarýný evcilleþtirmek", "Hayvan dövüþlerine izin vermek"],
+        answer: 1,
+        explanation: "Belediyeler sahipsiz hayvanlarýn kýsýrlaþtýrýlmasý, aþýlanmasý, tedavisi ve rehabilitasyonu için hayvan bakýmevleri kurmakla yasal olarak yükümlüdür."
+      }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+    let answered = false;
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      if (currentQ >= quizQuestions.length) {
+        let message = "";
+        if (score >= 8) message = "Harika! Hayvan haklarý ve mevzuat konusunda yüksek bir bilimsel farkýndalýða sahipsin. Çevrene örnek bir bilinç elçisisin!";
+        else if (score >= 5) message = "Güzel bir baþlangýç! Temel haklarý biliyorsun, Bilgi Merkezi ve Mevzuat bölümlerini inceleyerek bilgini pekiþtirebilirsin.";
+        else message = "Hayvan haklarý konusunda öðrenecek çok deðerli bilgiler var! Platformdaki rehberleri inceleyip testi yeniden çözebilirsin.";
+
+        container.innerHTML = `
+          <div class="text-center py-6">
+            <div class="w-20 h-20 rounded-3xl bg-forest-900 text-white flex items-center justify-center mx-auto mb-5 shadow-lg">
+              <i data-lucide="award" class="w-10 h-10 text-accent"></i>
+            </div>
+            <h3 class="font-display font-extrabold text-3xl text-navy mb-2">Test Tamamlandý!</h3>
+            <div class="text-4xl font-display font-extrabold text-accent my-4">${score} / ${quizQuestions.length} Doðru</div>
+            <p class="text-slate-600 max-w-lg mx-auto leading-relaxed mb-8">${message}</p>
+            <button onclick="resetQuiz()" class="px-8 py-3.5 rounded-2xl bg-forest-900 hover:bg-forest-800 text-white font-bold text-sm transition-all inline-flex items-center gap-2">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+              Testi Yeniden Çöz
+            </button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      const qObj = quizQuestions[currentQ];
+      const progress = ((currentQ) / quizQuestions.length) * 100;
+
+      container.innerHTML = `
+        <div class="mb-6">
+          <div class="flex justify-between text-xs font-bold text-slate-500 mb-2">
+            <span>Soru ${currentQ + 1} / ${quizQuestions.length}</span>
+            <span>Puan: ${score * 10}</span>
+          </div>
+          <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div class="bg-forest-800 h-full transition-all duration-300" style="width: ${progress}%"></div>
+          </div>
+        </div>
+        <h3 class="font-display font-bold text-xl text-navy mb-6 leading-snug">${qObj.q}</h3>
+        <div class="space-y-3" id="quiz-options">
+          ${qObj.options.map((opt, idx) => `
+            <button onclick="selectAnswer(${idx})" class="w-full text-left p-4 rounded-2xl border border-slate-200 hover:border-forest-800 hover:bg-forest-50/40 font-medium text-sm text-navy transition-all">
+              <span class="inline-block w-6 font-bold text-forest-800">${['A', 'B', 'C', 'D'][idx]})</span> ${opt}
+            </button>
+          `).join('')}
+        </div>
+        <div id="quiz-explanation" class="hidden mt-6 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-sm"></div>
+      `;
+    }
+
+    function selectAnswer(selectedIdx) {
+      if (answered) return;
+      answered = true;
+      const qObj = quizQuestions[currentQ];
+      const isCorrect = selectedIdx === qObj.answer;
+      if (isCorrect) score++;
+
+      const buttons = document.getElementById('quiz-options').children;
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
+        if (i === qObj.answer) {
+          buttons[i].className = 'w-full text-left p-4 rounded-2xl border-2 border-emerald-600 bg-emerald-50 font-semibold text-sm text-emerald-950';
+        } else if (i === selectedIdx) {
+          buttons[i].className = 'w-full text-left p-4 rounded-2xl border-2 border-red-500 bg-red-50 font-semibold text-sm text-red-950';
+        } else {
+          buttons[i].className = 'w-full text-left p-4 rounded-2xl border border-slate-200 opacity-50 text-sm';
+        }
+      }
+
+      const expBox = document.getElementById('quiz-explanation');
+      expBox.classList.remove('hidden');
+      expBox.innerHTML = `
+        <div class="font-bold ${isCorrect ? 'text-emerald-700' : 'text-red-700'} mb-1">
+          ${isCorrect ? '? Doðru Cevap!' : '? Yanlýþ Cevap'}
+        </div>
+        <p class="text-slate-700 mb-4">${qObj.explanation}</p>
+        <button onclick="nextQuestion()" class="px-6 py-2.5 rounded-xl bg-navy text-white text-xs font-bold hover:bg-slate-800">
+          ${currentQ + 1 === quizQuestions.length ? 'Sonuçlarý Gör' : 'Sonraki Soru ›'}
+        </button>
+      `;
+    }
+
+    function nextQuestion() {
+      currentQ++;
+      answered = false;
+      renderQuiz();
+    }
+
+    function resetQuiz() {
+      currentQ = 0;
+      score = 0;
+      answered = false;
+      renderQuiz();
+    }
+
+    // 6. CANLI FARKINDALIK ANKETÝ
+    let surveyResponses = [];
+
+    function submitSurvey(e) {
+      e.preventDefault();
+      const entry = [
+        Number(document.getElementById('q1').value),
+        Number(document.getElementById('q2').value),
+        Number(document.getElementById('q3').value),
+        Number(document.getElementById('q4').value),
+        Number(document.getElementById('q5').value)
+      ];
+      surveyResponses.push(entry);
+      document.getElementById('survey-feedback').classList.remove('hidden');
+      updateLiveChart();
+    }
+
+    function updateLiveChart() {
+      const count = surveyResponses.length;
+      document.getElementById('live-count-badge').textContent = 'Katýlýmcý: ' + count;
+      const labels = [
+        "1. Hukuki Bilgi Düzeyi",
+        "2. Sahiplenme Bilinci",
+        "3. Sokak Hayvanlarýna Destek",
+        "4. Caydýrýcý Yaptýrým Talebi",
+        "5. Okullarda Farkýndalýk Eðitimi"
+      ];
+      const avgs = [0, 1, 2, 3, 4].map(idx => {
+        const sum = surveyResponses.reduce((acc, row) => acc + row[idx], 0);
+        return (sum / count).toFixed(1);
+      });
+
+      document.getElementById('live-chart').innerHTML = labels.map((label, i) => `
+        <div>
+          <div class="flex justify-between text-xs font-semibold text-navy mb-1">
+            <span>${label}</span>
+            <span class="text-forest-800 font-bold">${avgs[i]} / 5.0</span>
+          </div>
+          <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+            <div class="bg-forest-800 h-full rounded-full transition-all duration-500" style="width: ${(avgs[i] / 5) * 100}%"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 7. TÜBÝTAK BÝLÝMSEL ARAÞTIRMA DOSYASI (DÜZENLENEBÝLÝR)
+    let researchData = [
+      { title: "1. Projenin Amacý", content: "Lise öðrencileri ve toplum genelinde hayvan haklarý, 5199 sayýlý kanun ve hayvan refahý konularýnda bilimsel temelli bir dijital farkýndalýk platformu geliþtirerek bilgi düzeyini ve empati temelli koruma davranýþlarýný artýrmak." },
+      { title: "2. Problem Durumu", content: "Hayvanlara yönelik kötü muamele, terk edilme ve doðal yaþam alanlarýnýn tahribatý vakalarýnýn devam etmesinde; yürürlükteki yasal yaptýrýmlarýn yeterince bilinmemesi ve bilimsel hayvan refahý bilincinin eksikliði önemli bir etkendir." },
+      { title: "3. Araþtýrma Sorusu", content: "Etkileþimli, bilimsel ve hukuki kaynaklara dayalý dijital bir farkýndalýk platformu kullanmak, bireylerin hayvan haklarý bilgi düzeyini ve koruma tutumlarýný anlamlý düzeyde etkiler mi?" },
+      { title: "4. Hipotez", content: "Hayvan haklarýnýn bilimsel ve hukuki boyutlarýný etkileþimli test ve rehberlerle sunan PATÝ ÝZÝ platformunu inceleyen katýlýmcýlarýn farkýndalýk ve yasal bilgi puanlarýnda anlamlý bir artýþ gözlenecektir." },
+      { title: "5. Yöntem", content: "Araþtýrmada betimsel tarama ve ön-test / son-test uygulama modeli planlanmýþtýr. Literatür taramasý (WOAH, UNEP, TÜBÝTAK, 5199 SK) sonrasýnda dijital platform tasarlanmýþ ve katýlýmcý geri bildirimleri toplanacaktýr." },
+      { title: "6. Veri Toplama Araçlarý", content: "Platform içerisine entegre edilen 10 soruluk çoktan seçmeli Hayvan Haklarý Bilgi Testi ve 5'li Likert tipi Toplumsal Farkýndalýk Anketi veri toplama aracý olarak kullanýlmaktadýr." },
+      { title: "7. Beklenen Sonuçlar", content: "[Araþtýrmacý Notu: Gerçek saha uygulamasý tamamlandýðýnda ön-test ve son-test puan karþýlaþtýrmalarý buraya eklenecektir.]" },
+      { title: "8. Toplumsal Katký", content: "Gençlerin hukuki baþvuru kanallarýný (112, HAYDÝ, DKMP, ALO 153) doðru öðrenmesi, barýnaktan sahiplenme kültürünün yaygýnlaþmasý ve sokak hayvanlarýyla saðlýklý bir yaþam kültürü oluþturulmasý." },
+      { title: "9. Sonuç ve Öneriler", content: "[Araþtýrmacý Notu: Veri analizi tamamlandýktan sonra elde edilen bilimsel bulgulara dayalý sonuç ve politika önerileri buraya yazýlacaktýr.]" }
+    ];
+    let isEditingResearch = false;
+
+    function renderResearch() {
+      const container = document.getElementById('research-sections');
+      container.innerHTML = researchData.map((sec, idx) => `
+        <div class="bg-white rounded-3xl p-7 border border-slate-200 shadow-sm">
+          <h3 class="font-display font-bold text-lg text-forest-900 mb-3">${sec.title}</h3>
+          ${isEditingResearch
+            ? `<textarea oninput="researchData[${idx}].content = this.value" rows="4" class="w-full p-3 rounded-xl border border-forest-800 text-sm text-slate-700 focus:outline-none">${sec.content}</textarea>`
+            : `<p class="text-sm text-slate-600 leading-relaxed">${sec.content}</p>`
+          }
+        </div>
+      `).join('');
+    }
+
+    function toggleEditResearch() {
+      isEditingResearch = !isEditingResearch;
+      const btn = document.getElementById('edit-research-btn');
+      btn.innerHTML = isEditingResearch
+        ? '<i data-lucide="check" class="w-4 h-4"></i> Deðiþiklikleri Kaydet'
+        : '<i data-lucide="edit-3" class="w-4 h-4"></i> Araþtýrmacý Notlarýný Düzenle';
+      renderResearch();
+      lucide.createIcons();
+    }
+
+    // 8. SLOGAN KOPYALAMA
+    function copySlogan(btn, text) {
+      navigator.clipboard.writeText(text);
+      const old = btn.textContent;
+      btn.textContent = "? Panoya Kopyalandý!";
+      setTimeout(() => btn.textContent = old, 2000);
+    }
+
+    // BAÞLANGIÇ ÇALIÞTIRMALARI
+    document.addEventListener('DOMContentLoaded', () => {
+      renderRights();
+      selectScenario(0, document.querySelector('.scenario-btn'));
+      renderVolunteer();
+      renderQuiz();
+      renderResearch();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
